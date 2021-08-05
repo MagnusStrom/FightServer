@@ -42,7 +42,8 @@ wss.on('connection', ws => {
         response.message += "\nServer found! Joining...";
         console.log("SERVER INFO: " + JSON.stringify(server[data.code]));
         if (server[data.code].players > 1) {
-          response.message += "\nServer is full!"
+          response.message += "\nServer is full!";
+          ws.send(JSON.stringify(response));
         } else {
           server[data.code].players++;
           server[data.code].code = data.code;
@@ -52,6 +53,9 @@ wss.on('connection', ws => {
             "username": data.username
           }
       }
+      ws.send(JSON.stringify(response));
+      console.log("Sending: " + JSON.stringify(server[data.code]));
+      ws.send(JSON.stringify(server[data.code]));
     } else {
       response.message += "\nServer not found! Creating...";
       server[data.code] = {
@@ -66,11 +70,24 @@ wss.on('connection', ws => {
         }
     }
     }
-    }
     ws.send(JSON.stringify(response));
     console.log("Sending: " + JSON.stringify(server[data.code]));
     ws.send(JSON.stringify(server[data.code]));
+    }
   } else if (data.type == "getserver") {
+    var response = {
+      "type": "message",
+      "message": "",
+      "serverinfo": {}
+    }
+    if (server[data.code] == null) {
+      response.message += "\nServer not found!";
+      ws.send(JSON.stringify(response));
+    } else {
+     // response.message += "\nGetting data for code " + data.code + "...";
+     //console.log("Sending: " + JSON.stringify(server[data.code]));
+      ws.send(JSON.stringify(server[data.code]));
+    }
   }
 });
   var message = {
