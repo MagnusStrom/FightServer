@@ -1,0 +1,22 @@
+{
+    "hi": {
+        "status": "waiting",
+        "players": 2,
+        "userdata": {
+            "2": {
+                "character": "test",
+                "player": 2
+            }
+        }
+    },
+    "russ": {
+        "status": "waiting",
+        "players": 1,
+        "userdata": {
+            "1": {
+                "character": "test",
+                "player": 1
+            }
+        }
+    }
+}
