@@ -58,7 +58,10 @@ wss.on('connection', ws => {
             "y": 0,
             "animation": "idle",
             "hitting": "false",
-            "special": "false"
+            "special": "false",
+            "facingleft": "false",
+            "attackleft": "false",
+            "stunned": "false"
           }
       }
       ws.send(JSON.stringify(response));
@@ -79,7 +82,10 @@ wss.on('connection', ws => {
           "y": 0,
           "animation": "idle",
           "hitting": "false",
-          "special": "false"
+          "special": "false",
+          "facingleft": "false",
+          "attackleft": "false",
+          "stunned": "false"
         }
     }
     }
@@ -123,6 +129,9 @@ wss.on('connection', ws => {
   server[data.code].userdata[data.player].animation = data.animation;
   server[data.code].userdata[data.player].hitting = data.hitting;
   server[data.code].userdata[data.player].special = data.special;
+  server[data.code].userdata[data.player].facingleft = data.facingleft;
+  server[data.code].userdata[data.player].attackleft = data.attackleft;
+  server[data.code].userdata[data.player].stunned = data.stunned;
   //console.log("ANIM: " + data.animation);
  // console.log("UPDATING DATA: " + JSON.stringify(server[data.code]));
   ws.send(JSON.stringify(server[data.code]));
